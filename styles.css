@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.calculator {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.buttons {
+    background-color: darkgray;
+}
+
+.equality {
+    float: right;
+}
+
+.numbers {
+    float: left;
+}
