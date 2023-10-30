@@ -1,25 +1,33 @@
 // Initialize values
-let initialNumber = '';
-let secondNumber = '';
-let currentMethod = null;
+let currentInput = '';
+let previousInputs = [];
+let currentOperator = '';
 
-// Functions for basic math
-function addition(x,y) {
-    return x + y
+// Add in event listeners
+
+// Functions
+function updateDisplay() {
+    console.log(currentInput);
+    console.log(previousInputs);
 };
 
-function subtraction(x,y) {
-    return x - y
+function numberClick(number) {
+    // Append number clicked into currentInput
+    currentInput = number;
+    updateDisplay();
 };
 
-function multiplication(x,y) {
-    return x * y
+function operatorClick(operator) {
+    // Store operator as currentOperator
+    currentOperator = operator;
+    // Add both to previous inputs
+    previousInputs.push(currentOperator, currentInput);
+    // Reset currentInput
+    currentInput = '';
+    updateDisplay();
 };
 
-function division(x,y) {
-    if (y === 0) {
-        return "Divide by Zero error";
-    } else {
-        return x/y
-    }
-};
+// Testing for functionality
+let testInput = prompt("Enter a number");
+numberClick(testInput)
+operatorClick('multiply')
