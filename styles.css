@@ -7,10 +7,7 @@ body {
 .calculator {
     border: 1px solid black;
     border-radius: 10px;
-}
-
-.buttons {
-    background-color: darkgray;
+    background-color: gray;
 }
 
 .equality {
