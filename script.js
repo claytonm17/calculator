@@ -78,6 +78,7 @@ equal.addEventListener('click', () => {
 // Create the display
 const screen = document.querySelector('.screen');
 const display = document.createElement('div');
+let fullExpression = '' // Creating adjacent expression for display
 
 // Functions
 function updateDisplay(output) {
@@ -89,7 +90,8 @@ function updateDisplay(output) {
 function numberClick(number) {
     // Append number clicked into currentInput
     currentInput = number;
-    updateDisplay();
+    fullExpression += `${number} `
+    updateDisplay(fullExpression);
 };
 function operatorClick(operator) {
     // Store operator as currentOperator
@@ -98,7 +100,8 @@ function operatorClick(operator) {
     previousInputs.push(currentInput, currentOperator);
     // Reset currentInput
     currentInput = '';
-    updateDisplay();
+    fullExpression += `${operator} `;
+    updateDisplay(fullExpression);
     console.log(currentOperator);
 };
 function calculate() {
@@ -132,5 +135,6 @@ function clearInput() {
     currentInput = '';
     previousInputs = [];
     currentOperator = '';
-    updateDisplay('');
+    fullExpression = '';
+    updateDisplay(fullExpression);
 };
