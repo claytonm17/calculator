@@ -66,7 +66,7 @@ decimal.addEventListener('click', () => {
 });
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', () => {
-    console.log('clear'); // Add in functionality
+    clearScreen();
 });
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
@@ -74,10 +74,16 @@ equal.addEventListener('click', () => {
     calculate();
 });
 
+// Create the display
+const screen = document.querySelector('.screen');
+const display = document.createElement('div');
+
 // Functions
 function updateDisplay() {
-    console.log(currentInput);
-    console.log(previousInputs);
+    console.log('Display updated')
+    display.classList.add('content');
+    display.textContent = previousInputs;
+    screen.appendChild(display);
 };
 function numberClick(number) {
     // Append number clicked into currentInput
@@ -92,11 +98,38 @@ function operatorClick(operator) {
     // Reset currentInput
     currentInput = '';
     updateDisplay();
-    console.log(previousInputs)
+    console.log(currentOperator);
 };
 function calculate() {
     // Append most recent input
     previousInputs.push(currentInput);
-    
+    console.log(previousInputs);
+
+    let result = previousInputs[0];
+    // Loop to determine the evaluation
+    for (let i = 1; i < previousInputs.length; i++) {
+        const step = previousInputs[i];
+
+        if (typeof step === 'number') {
+            if (currentOperator === '+') {
+                result += step;
+            } else if (currentOperator === '-') {
+                result -= step;
+            } else if (currentOperator === '*') {
+                result *= step;
+            } else if (currentOperator === '/') {
+                result /= step;
+            }
+        } else if (step === '+' || step === '-' || step === '*' || step === '/') {
+            currentOperator = step;
+        }
+    }
+    console.log(result)
+    updateDisplay();
+};
+function clearScreen() {
+    currentInput = '';
+    previousInputs = [];
+    currentOperator = '';
     updateDisplay();
 };
