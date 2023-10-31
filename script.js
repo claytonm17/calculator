@@ -62,7 +62,7 @@ zero.addEventListener('click', () => {
 });
 const decimal = document.querySelector('#decimal');
 decimal.addEventListener('click', () => {
-    console.log('decimal');  // Add in functionality
+    numberClick('.');
 });
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', () => {
@@ -82,17 +82,16 @@ let fullExpression = '' // Creating adjacent expression for display
 
 // Functions
 function updateDisplay(output) {
-    console.log('Display updated')
     display.classList.add('content');
     display.textContent = output;
     screen.appendChild(display);
 };
 function numberClick(number) {
-    if (typeof currentInput === 'number') {
-        currentInput = parseFloat(currentInput + number.toString());
-    } else {
-        currentInput = parseFloat(currentInput + number.toString());
+    // Ignore duplicate decimals
+    if (number === '.' && currentInput.toString().includes('.')) {
+        return;
     }
+    currentInput += number;
     fullExpression += number;
     updateDisplay(fullExpression);
 };
@@ -109,8 +108,10 @@ function operatorClick(operator) {
 };
 function calculate() {
     // Append most recent input
-    previousInputs.push(parseFloat(currentInput));
-    currentInput = '';
+    if (currentInput !== '') {
+        previousInputs.push(parseFloat(currentInput));
+        currentInput = '';
+    }
 
     console.log(previousInputs);
 
@@ -121,7 +122,7 @@ function calculate() {
 
         if (typeof step === 'number') {
             if (currentOperator === '+') {
-                result += step;
+                result = parseFloat(result) + step;
             } else if (currentOperator === '-') {
                 result -= step;
             } else if (currentOperator === '*') {
@@ -133,7 +134,6 @@ function calculate() {
             currentOperator = step;
         }
     }
-    console.log(result)
     updateDisplay(result);
 };
 function clearInput() {
