@@ -66,7 +66,8 @@ decimal.addEventListener('click', () => {
 });
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', () => {
-    clearScreen();
+    clearInput();
+    updateDisplay();
 });
 const equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
@@ -79,10 +80,10 @@ const screen = document.querySelector('.screen');
 const display = document.createElement('div');
 
 // Functions
-function updateDisplay() {
+function updateDisplay(output) {
     console.log('Display updated')
     display.classList.add('content');
-    display.textContent = previousInputs;
+    display.textContent = output;
     screen.appendChild(display);
 };
 function numberClick(number) {
@@ -125,11 +126,11 @@ function calculate() {
         }
     }
     console.log(result)
-    updateDisplay();
+    updateDisplay(result);
 };
-function clearScreen() {
+function clearInput() {
     currentInput = '';
     previousInputs = [];
     currentOperator = '';
-    updateDisplay();
+    updateDisplay('');
 };
