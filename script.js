@@ -88,9 +88,12 @@ function updateDisplay(output) {
     screen.appendChild(display);
 };
 function numberClick(number) {
-    // Append number clicked into currentInput
-    currentInput = number;
-    fullExpression += `${number} `
+    if (typeof currentInput === 'number') {
+        currentInput = parseFloat(currentInput + number.toString());
+    } else {
+        currentInput = parseFloat(currentInput + number.toString());
+    }
+    fullExpression += number;
     updateDisplay(fullExpression);
 };
 function operatorClick(operator) {
@@ -100,13 +103,15 @@ function operatorClick(operator) {
     previousInputs.push(currentInput, currentOperator);
     // Reset currentInput
     currentInput = '';
-    fullExpression += `${operator} `;
+    fullExpression += `${operator}`;
     updateDisplay(fullExpression);
     console.log(currentOperator);
 };
 function calculate() {
     // Append most recent input
-    previousInputs.push(currentInput);
+    previousInputs.push(parseFloat(currentInput));
+    currentInput = '';
+
     console.log(previousInputs);
 
     let result = previousInputs[0];
