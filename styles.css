@@ -8,6 +8,7 @@ body {
     border: 1px solid black;
     border-radius: 10px;
     background-color: gray;
+    padding: 5px;
 }
 
 .equality {
@@ -16,4 +17,19 @@ body {
 
 .numbers {
     float: left;
+}
+
+.screen {
+    text-align: end;
+    padding: 5px;
+}
+
+button {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+#equal {
+    height: 200px;
 }
